@@ -1,5 +1,8 @@
 name: run-ci
 on:
+  push:
+    branches:
+      - develop
   pull_request:
     branches:
       - develop
@@ -9,15 +12,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Get develop to fix warning in SonarCloud
+        run: git fetch origin develop
+
       - name: Setup node
         uses: actions/setup-node@v2
         with:
           node-version: '14'
-      - run: yarn
-      - run: yarn test
 
-      # - name: SonarCloud Scan
-      #   uses: SonarSource/sonarcloud-github-action@master
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Run yarn and yarn test
+        run: |
+          yarn
+          yarn test
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
