@@ -1,6 +1,6 @@
 # FullCycle 2.0 - Continuous Integration - Challenge
 
-[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/dashboard?id=felipefa_fc-ci-challenge)
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-orange.svg)](https://sonarcloud.io/dashboard?id=felipefa_fc-ci-challenge)
 
 In this challenge, we will consolidate our knowledge in relation to the creation of a CI pipeline by doing the following steps.
 
